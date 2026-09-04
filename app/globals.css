@@ -2,25 +2,51 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0a0a;
+  --muted-foreground: #6b7280;
+  --surface: #f5f5f7;
+  --border: #e7e7ec;
+  --accent: #c9f24e;
+  --accent-foreground: #0a0a0a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+}
+
+/* Subtle grid background (light surfaces) */
+.bg-grid {
+  background-image: linear-gradient(
+      to right,
+      rgba(10, 10, 10, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(10, 10, 10, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Subtle grid background (dark surfaces) */
+.bg-grid-light {
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
 }
