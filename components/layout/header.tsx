@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { navLinks } from "@/lib/data/navigation";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/layout/logo";
@@ -28,7 +29,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button href="/book" variant="accent" size="md">
+          <Button href="/book" variant="dark" size="md">
             Book a call
           </Button>
         </div>
@@ -36,7 +37,7 @@ export function Header() {
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-surface md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg text-foreground transition-transform duration-200 hover:bg-surface active:scale-90 md:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >
@@ -72,8 +73,13 @@ export function Header() {
         </button>
       </Container>
 
-      {open ? (
-        <div className="border-t border-border bg-background md:hidden">
+      <div
+        className={cn(
+          "grid overflow-hidden bg-background transition-[grid-template-rows] duration-300 ease-in-out md:hidden",
+          open ? "grid-rows-[1fr] border-t border-border" : "grid-rows-[0fr]",
+        )}
+      >
+        <div className="min-h-0 overflow-hidden">
           <Container className="flex flex-col gap-1 py-4">
             {navLinks.map((link) => (
               <Link
@@ -87,7 +93,7 @@ export function Header() {
             ))}
             <Button
               href="/book"
-              variant="accent"
+              variant="dark"
               size="md"
               className="mt-2 w-full"
             >
@@ -95,7 +101,7 @@ export function Header() {
             </Button>
           </Container>
         </div>
-      ) : null}
+      </div>
     </header>
   );
 }
