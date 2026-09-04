@@ -2,7 +2,6 @@ import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/data/services";
-import { HeroIllustration } from "@/components/home/hero-illustration";
 
 const avatars = [
   { letter: "A", className: "bg-emerald-100 text-emerald-700" },
@@ -14,92 +13,220 @@ const avatars = [
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
+      {/* Background grid */}
       <div
-        className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/30 blur-3xl"
+        className="pointer-events-none absolute inset-0 bg-grid"
         aria-hidden="true"
       />
 
-      <Container className="relative grid items-center gap-12 py-20 sm:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:py-28">
-        {/* Left — copy */}
-        <div className="flex flex-col items-start gap-6">
-          <Badge>
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            AI content system for founders
-          </Badge>
+      {/* Soft glow */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-20 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
+        aria-hidden="true"
+      />
 
-          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Create content
-            <br />
-            that{" "}
-            <span className="relative inline-block">
-              sells
-              <svg
-                className="absolute -bottom-1 left-0 w-full"
-                viewBox="0 0 200 12"
-                fill="none"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M2 9C60 3 140 3 198 9"
-                  stroke="var(--accent)"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                />
-              </svg>
+      <Container className="relative">
+        <div className="relative flex min-h-[570px] flex-col items-center justify-center py-20 text-center sm:py-24">
+          
+          {/* Floating labels */}
+          <div className="pointer-events-none absolute inset-0 hidden md:block">
+            {/* Branding */}
+            <span
+              className="
+                absolute left-[5%] top-[31%]
+                rotate-[-8deg]
+                rounded-sm
+                bg-cyan-100
+                px-3 py-1
+                font-hand text-sm
+                text-cyan-900
+              "
+            >
+              Branding
             </span>
-          </h1>
 
-          <p className="max-w-xl text-lg text-muted-foreground">
-            We build you a complete AI content system in 4 sessions. Your ideal
-            clients find you, trust you, and buy from you — without a single
-            sales call.
-          </p>
+            {/* Positioning */}
+            <span
+              className="
+                absolute left-1/2 top-[10%]
+                -translate-x-1/2
+                rotate-[1deg]
+                rounded-sm
+                bg-indigo-100
+                px-3 py-1
+                font-hand text-sm
+                text-indigo-900
+              "
+            >
+              Positioning
+            </span>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Button href="/book" variant="accent" size="lg">
-              Book a call
-            </Button>
-            <Button href="/#about" variant="outline" size="lg">
-              Talk to the team
-            </Button>
+            {/* Organic Traffic */}
+            <span
+              className="
+                absolute right-[7%] top-[27%]
+                rotate-[10deg]
+                rounded-sm
+                bg-amber-100
+                px-3 py-1
+                font-hand text-sm
+                text-amber-900
+              "
+            >
+              Organic
+              <br />
+              Traffic
+            </span>
+
+            {/* Funnel */}
+            <span
+              className="
+                absolute left-[13%] top-[67%]
+                rotate-[-5deg]
+                rounded-sm
+                bg-green-100
+                px-3 py-1
+                font-hand text-sm
+                text-green-900
+              "
+            >
+              Funnel
+            </span>
+
+            {/* Systems */}
+            <span
+              className="
+                absolute right-[12%] top-[68%]
+                rotate-[5deg]
+                rounded-sm
+                bg-purple-100
+                px-3 py-1
+                font-hand text-sm
+                text-purple-900
+              "
+            >
+              Systems
+            </span>
+
+            {/* Distribution */}
+            <span
+              className="
+                absolute bottom-[7%] left-1/2
+                -translate-x-1/2
+                rotate-[-2deg]
+                rounded-sm
+                bg-violet-100
+                px-3 py-1
+                font-hand text-sm
+                text-violet-900
+              "
+            >
+              Distribution
+            </span>
           </div>
 
-          <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:gap-4">
-            <div className="flex -space-x-2">
-              {avatars.map((a) => (
+          {/* Main content */}
+          <div className="relative z-10 flex max-w-5xl flex-col items-center">
+
+            {/* Headline */}
+            <h1
+              className="
+                text-5xl
+                font-medium
+                leading-[0.98]
+                tracking-[-0.045em]
+                text-foreground
+                sm:text-6xl
+                md:text-7xl
+                lg:text-[72px]
+              "
+            >
+              Create content{" "}
+              <span className="relative inline-block whitespace-nowrap">
                 <span
-                  key={a.letter}
-                  className={`flex h-9 w-9 items-center justify-center rounded-full border-2 border-background text-xs font-semibold ${a.className}`}
+                  className="
+                    relative z-10
+                    font-hand
+                    px-1
+                    after:absolute
+                    after:inset-x-0
+                    after:bottom-[5%]
+                    after:-z-10
+                    after:h-[72%]
+                    after:bg-accent
+                    after:content-['']
+                  "
                 >
-                  {a.letter}
+                  that sells
                 </span>
-              ))}
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Trusted by founders across the globe
-            </p>
-          </div>
 
-          <div className="flex flex-wrap gap-2 pt-2">
-            {services.map((s) => (
-              <span
-                key={s.id}
-                className="rounded-full border border-border px-3 py-1.5 text-sm text-muted-foreground"
-              >
-                {s.label}
+                {/* Top lime dot */}
+                <span
+                  className="
+                    absolute
+                    -left-2
+                    -top-2
+                    z-20
+                    h-3
+                    w-3
+                    rounded-full
+                    bg-accent
+                  "
+                />
+
+                {/* Bottom lime dot */}
+                <span
+                  className="
+                    absolute
+                    -bottom-2
+                    -right-2
+                    z-20
+                    h-3
+                    w-3
+                    rounded-full
+                    bg-accent
+                  "
+                />
               </span>
-            ))}
-          </div>
-        </div>
+            </h1>
 
-        {/* Right — illustration */}
-        <div className="relative hidden lg:block">
-          <HeroIllustration />
+            {/* Description */}
+            <p
+              className="
+                mt-7
+                max-w-2xl
+                text-base
+                leading-6
+                text-muted-foreground
+                sm:text-lg
+              "
+            >
+              We build you a complete AI content system in 4 sessions. Your
+              ideal clients find you, trust you, and buy from you, without a
+              single sales call.
+            </p>
+
+            {/* CTA buttons */}
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
+              <Button
+                href="/book"
+                variant="dark"
+                size="lg"
+                className="rounded-full px-7"
+              >
+                Book a session
+              </Button>
+
+              <Button
+                href="/#about"
+                variant="white"
+                size="lg"
+                className="rounded-full px-7"
+              >
+                Talk to the team
+              </Button>
+            </div>
+          </div>
         </div>
       </Container>
     </section>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type Variant = "accent" | "dark" | "outline" | "ghost";
+type Variant = "accent" | "dark" | "white" | "outline" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const base =
@@ -11,6 +11,7 @@ const base =
 const variants: Record<Variant, string> = {
   accent: "bg-accent text-accent-foreground hover:bg-accent/85",
   dark: "bg-foreground text-background hover:bg-foreground/85",
+  white: "border border-border bg-white text-foreground hover:bg-surface",
   outline: "border border-border bg-transparent text-foreground hover:bg-surface",
   ghost: "text-foreground hover:bg-surface",
 };
