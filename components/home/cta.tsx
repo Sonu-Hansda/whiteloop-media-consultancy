@@ -20,11 +20,11 @@ export function Cta() {
               pressure, just a clear plan.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <Button href="/book" variant="accent" size="lg">
+              <Button href="/#sessions" variant="accent" size="lg">
                 Book a call
               </Button>
               <Link
-                href="/#about"
+                href="/free-session"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-background/20 px-6 text-base font-medium text-background transition-colors hover:bg-background/10"
               >
                 Talk to the team

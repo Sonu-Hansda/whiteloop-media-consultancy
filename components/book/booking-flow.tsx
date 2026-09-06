@@ -1,25 +1,28 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { packages } from "@/lib/data/packages";
-import { cn } from "@/lib/utils";
+import { getSession } from "@/lib/data/sessions";
+import { bookSlot, type Slot } from "@/lib/slots";
+import { PackageSelector } from "@/components/book/package-selector";
+import { SessionSummary } from "@/components/book/session-summary";
+import { SlotPicker } from "@/components/book/slot-picker";
+import { Field, inputClass } from "@/components/book/form-fields";
+import { QualificationFields } from "@/components/book/qualification-fields";
+import { emptyQualification } from "@/lib/data/qualification";
+import type { Qualification } from "@/types";
 
-const inputClass =
-  "w-full rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-foreground/40 focus:outline-none focus:ring-2 focus:ring-foreground/10";
-
-function Field({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <label className="flex flex-col gap-1.5">
-      <span className="text-sm font-medium text-foreground">{label}</span>
-      {children}
-    </label>
-  );
-}
-
-export function BookingFlow({ initialPackage }: { initialPackage?: string }) {
+export function BookingFlow({
+  initialPackage,
+  initialSession,
+}: {
+  initialPackage?: string;
+  initialSession?: string;
+}) {
   const router = useRouter();
+  const session = initialSession ? getSession(initialSession) : undefined;
   const [selected, setSelected] = useState<string | undefined>(
     initialPackage && packages.some((p) => p.slug === initialPackage)
       ? initialPackage
@@ -27,13 +30,15 @@ export function BookingFlow({ initialPackage }: { initialPackage?: string }) {
   );
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [company, setCompany] = useState("");
-  const [message, setMessage] = useState("");
+  const [qualification, setQualification] =
+    useState<Qualification>(emptyQualification);
+  const [slot, setSlot] = useState<Slot | undefined>();
   const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const current = packages.find((p) => p.slug === selected) ?? packages[0];
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!name.trim()) {
       setError("Please tell us your name.");
@@ -43,91 +48,113 @@ export function BookingFlow({ initialPackage }: { initialPackage?: string }) {
       setError("Please enter a valid email address.");
       return;
     }
+    if (!qualification.phone.trim()) {
+      setError("Please add your phone number.");
+      return;
+    }
+    if (!qualification.country.trim()) {
+      setError("Please add your country.");
+      return;
+    }
+    if (!qualification.role) {
+      setError("Please tell us what best describes you.");
+      return;
+    }
+    if (!qualification.instagram.trim()) {
+      setError("Please add your Instagram handle.");
+      return;
+    }
+    if (!qualification.business.trim()) {
+      setError("Please tell us about your business.");
+      return;
+    }
+    if (!qualification.audience) {
+      setError("Please select your audience size.");
+      return;
+    }
+    if (!qualification.budget) {
+      setError("Please select your monthly budget.");
+      return;
+    }
+    if (!qualification.challenge.trim()) {
+      setError("Please describe your biggest challenge.");
+      return;
+    }
+    if (!slot) {
+      setError("Please pick a time slot.");
+      return;
+    }
     setError(null);
-    router.push(
-      `/book/success?package=${current.slug}&name=${encodeURIComponent(name.trim())}`,
-    );
+    setSubmitting(true);
+    try {
+      if (session) {
+        await bookSlot(slot, {
+          name: name.trim(),
+          email: email.trim(),
+          ...qualification,
+          packageSlug: session.slug,
+          packageName: session.title,
+          packagePrice: session.price,
+          kind: "session",
+        });
+        router.push(
+          `/book/success?package=${session.slug}&name=${encodeURIComponent(
+            name.trim(),
+          )}&when=${encodeURIComponent(`${slot.dateLabel}, ${slot.label}`)}`,
+        );
+      } else {
+        await bookSlot(slot, {
+          name: name.trim(),
+          email: email.trim(),
+          ...qualification,
+          packageSlug: current.slug,
+          packageName: current.name,
+          packagePrice: current.price,
+          kind: "package",
+        });
+        router.push(
+          `/book/success?package=${current.slug}&name=${encodeURIComponent(
+            name.trim(),
+          )}&when=${encodeURIComponent(`${slot.dateLabel}, ${slot.label}`)}`,
+        );
+      }
+    } catch (err) {
+      setError(
+        err instanceof Error && err.message.includes("booked")
+          ? err.message
+          : "Something went wrong saving your booking. Please try again.",
+      );
+      setSubmitting(false);
+    }
   }
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr]">
-      {/* Step 1 — package */}
-      <div>
+    <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr]">
+      {/* Step 1 — what you're booking */}
+      <div className="min-w-0">
         <h2 className="text-lg font-semibold text-foreground">
-          1. Choose your package
+          {session ? "Your session" : "1. Choose your package"}
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Pick the plan that fits where you are.
+          {session
+            ? "Here's what you're booking."
+            : "Pick the plan that fits where you are."}
         </p>
-        <div className="mt-6 flex flex-col gap-3">
-          {packages.map((pkg) => {
-            const active = pkg.slug === selected;
-            return (
-              <button
-                key={pkg.slug}
-                type="button"
-                onClick={() => setSelected(pkg.slug)}
-                className={cn(
-                  "flex items-start justify-between rounded-2xl border p-5 text-left transition-colors",
-                  active
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-border bg-surface hover:border-foreground/30",
-                )}
-              >
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={cn(
-                        "text-base font-semibold",
-                        active ? "text-background" : "text-foreground",
-                      )}
-                    >
-                      {pkg.name}
-                    </span>
-                    {pkg.featured ? (
-                      <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-accent-foreground">
-                        Popular
-                      </span>
-                    ) : null}
-                  </div>
-                  <p
-                    className={cn(
-                      "mt-0.5 text-sm",
-                      active ? "text-background/70" : "text-muted-foreground",
-                    )}
-                  >
-                    {pkg.tagline}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <span
-                    className={cn(
-                      "text-base font-semibold",
-                      active ? "text-background" : "text-foreground",
-                    )}
-                  >
-                    {pkg.price}
-                  </span>
-                  <p
-                    className={cn(
-                      "text-xs",
-                      active ? "text-background/70" : "text-muted-foreground",
-                    )}
-                  >
-                    {pkg.duration}
-                  </p>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+
+        {session ? (
+          <div className="mt-6">
+            <SessionSummary session={session} />
+          </div>
+        ) : (
+          <PackageSelector selected={selected} onSelect={setSelected} />
+        )}
       </div>
 
       {/* Step 2 — details */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex min-w-0 flex-col gap-4">
         <div>
           <h2 className="text-lg font-semibold text-foreground">
-            2. Your details
+            Your details
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
             Tell us a bit about you and your goals.
@@ -154,24 +181,22 @@ export function BookingFlow({ initialPackage }: { initialPackage?: string }) {
           </Field>
         </div>
 
-        <Field label="Company (optional)">
-          <input
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-            placeholder="Acme Inc."
-            className={inputClass}
-          />
-        </Field>
+        <QualificationFields
+          value={qualification}
+          onChange={setQualification}
+        />
 
-        <Field label="What do you want to achieve? (optional)">
-          <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="I want to build an AI content system that attracts my ideal clients…"
-            rows={4}
-            className={cn(inputClass, "resize-none")}
-          />
-        </Field>
+        <div className="pt-2">
+          <h2 className="text-lg font-semibold text-foreground">
+            Pick a time
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Times already booked are greyed out.
+          </p>
+          <div className="mt-4">
+            <SlotPicker selected={slot?.id} onSelect={setSlot} />
+          </div>
+        </div>
 
         {error ? (
           <p className="text-sm font-medium text-red-600">{error}</p>
@@ -179,20 +204,37 @@ export function BookingFlow({ initialPackage }: { initialPackage?: string }) {
 
         <div className="rounded-2xl border border-border bg-surface p-4 text-sm">
           <div className="flex items-center justify-between">
-            <span className="text-muted-foreground">Selected package</span>
+            <span className="text-muted-foreground">
+              {session ? "Your session" : "Selected package"}
+            </span>
             <span className="font-semibold text-foreground">
-              {current.name} — {current.price}
+              {session
+                ? `${session.title} — ${session.price}`
+                : `${current.name} — ${current.price}`}
             </span>
           </div>
+          {slot ? (
+            <div className="mt-2 flex items-center justify-between border-t border-border pt-2">
+              <span className="text-muted-foreground">Your slot</span>
+              <span className="font-semibold text-foreground">
+                {slot.dateLabel}, {slot.label}
+              </span>
+            </div>
+          ) : null}
         </div>
 
-        <Button type="submit" variant="accent" size="lg" className="w-full">
-          Book my call
+        <Button
+          type="submit"
+          variant="accent"
+          size="lg"
+          className="w-full"
+          disabled={submitting}
+        >
+          {submitting ? "Booking…" : "Book my call"}
         </Button>
 
         <p className="text-center text-xs text-muted-foreground">
-          Scheduling is handled in the next step — we’ll confirm your call with
-          a calendar link.
+          We&apos;ll confirm your booking by email or WhatsApp.
         </p>
       </form>
     </div>

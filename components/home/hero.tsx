@@ -209,7 +209,7 @@ export function Hero() {
             {/* CTA buttons */}
             <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
               <Button
-                href="/book"
+                href="/#sessions"
                 variant="dark"
                 size="lg"
                 className="rounded-full px-7"
@@ -218,7 +218,7 @@ export function Hero() {
               </Button>
 
               <Button
-                href="/#about"
+                href="/free-session"
                 variant="white"
                 size="lg"
                 className="rounded-full px-7"

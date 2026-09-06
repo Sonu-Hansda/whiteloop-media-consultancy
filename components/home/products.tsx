@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
@@ -27,13 +28,13 @@ export function Products() {
                 )}
               >
                 {pkg.featured ? (
-                  <span className="mb-4 w-fit rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
+                  <Badge variant="accent" className="mb-4 w-fit">
                     Most popular
-                  </span>
+                  </Badge>
                 ) : (
-                  <span className="mb-4 w-fit rounded-full border border-border px-3 py-1 text-xs font-medium text-muted-foreground">
+                  <Badge variant="outline" className="mb-4 w-fit">
                     {pkg.duration}
-                  </span>
+                  </Badge>
                 )}
 
                 <h3 className="text-xl font-semibold">{pkg.name}</h3>

@@ -1,27 +1,28 @@
 "use client";
 
 import { useState } from "react";
+
+import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
 
 const faqs = [
   {
-    q: "What exactly do I get in 4 sessions?",
-    a: "Placeholder answer — we’ll refine this section soon.",
+    q: "What if I don’t have a following yet?",
+    a: "Doesn't matter. Session 1 starts from zero — positioning and pillars come before audience size.",
   },
   {
-    q: "Do I need to be technical?",
-    a: "Placeholder answer — we’ll refine this section soon.",
+    q: "What if I’m not techy?",
+    a: "The AI clone session is built for non-technical founders. You highlight a script, the system does the rest.",
   },
   {
-    q: "How soon will I see results?",
-    a: "Placeholder answer — we’ll refine this section soon.",
+    q: "Can I book just one session, or do I need the full program?",
+    a: "Each session stands alone. The Content Mastery Program is only worth it if you want all four done together.",
   },
   {
-    q: "What if it doesn’t fit my business?",
-    a: "Placeholder answer — we’ll refine this section soon.",
+    q: "What’s your refund policy?",
+    a: "If you no-show without notice, the session isn't refunded. Reschedules are fine with 24 hours' notice.",
   },
 ];
 
@@ -30,56 +31,62 @@ export function Faq() {
 
   return (
     <section id="faq" className="scroll-mt-24 border-t border-border">
-      <Container className="py-20 sm:py-28">
+      <Container className="py-20 sm:py-24">
         <Reveal>
-          <SectionHeading
-            eyebrow="FAQ"
-            title="Frequently asked questions"
-            description="Answers to the questions founders ask us most."
-          />
-          <div className="mx-auto mt-12 max-w-2xl overflow-hidden rounded-3xl border border-border bg-surface">
+          {/* Header */}
+          <div className="mx-auto max-w-3xl text-center">
+            <Badge>FAQ</Badge>
+
+            <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+              Before you book
+            </h2>
+          </div>
+
+          {/* FAQ List */}
+          <div className="mx-auto mt-14 max-w-3xl">
             {faqs.map((faq, index) => {
               const isOpen = open === index;
+
               return (
                 <div
                   key={faq.q}
-                  className="border-b border-border last:border-b-0"
+                  className="border-b border-border"
                 >
                   <button
                     type="button"
                     onClick={() => setOpen(isOpen ? null : index)}
                     aria-expanded={isOpen}
-                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                    className="flex w-full items-center justify-between gap-6 py-6 text-left"
                   >
-                    <span className="text-base font-semibold text-foreground">
+                    <span className="text-sm font-semibold text-foreground sm:text-base">
                       {faq.q}
                     </span>
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className={cn(
-                        "h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300",
-                        isOpen && "rotate-180",
-                      )}
+
+                    {/* Plus / Minus */}
+                    <span
+                      className="relative flex h-5 w-5 shrink-0 items-center justify-center text-muted-foreground"
                       aria-hidden="true"
                     >
-                      <path
-                        d="M6 9l6 6 6-6"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                      <span className="absolute h-px w-3 bg-current" />
+
+                      <span
+                        className={cn(
+                          "absolute h-3 w-px bg-current transition-transform duration-200",
+                          isOpen ? "scale-y-0" : "scale-y-100"
+                        )}
                       />
-                    </svg>
+                    </span>
                   </button>
+
+                  {/* Answer */}
                   <div
                     className={cn(
                       "grid transition-[grid-template-rows] duration-300 ease-in-out",
-                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                     )}
                   >
                     <div className="min-h-0 overflow-hidden">
-                      <p className="px-6 pb-5 text-sm text-muted-foreground">
+                      <p className="max-w-2xl pb-6 pr-10 text-sm leading-7 text-muted-foreground">
                         {faq.a}
                       </p>
                     </div>

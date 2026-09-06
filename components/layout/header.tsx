@@ -21,7 +21,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-surface hover:text-foreground"
+              className="rounded-full px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface"
             >
               {link.label}
             </Link>
@@ -29,7 +29,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button href="/book" variant="dark" size="md">
+          <Button href="/#sessions" variant="dark" size="md">
             Book a call
           </Button>
         </div>
@@ -92,7 +92,7 @@ export function Header() {
               </Link>
             ))}
             <Button
-              href="/book"
+              href="/#sessions"
               variant="dark"
               size="md"
               className="mt-2 w-full"

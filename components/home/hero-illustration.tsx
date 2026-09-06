@@ -1,3 +1,5 @@
+import { Badge } from "@/components/ui/badge";
+
 export function HeroIllustration() {
   return (
     <div className="relative mx-auto w-full max-w-md">
@@ -16,9 +18,7 @@ export function HeroIllustration() {
               <span className="h-2.5 w-2.5 rounded-full bg-foreground/15" />
               <span className="h-3 w-24 rounded-full bg-foreground/10" />
             </div>
-            <span className="rounded-full bg-accent px-2.5 py-1 text-xs font-semibold text-accent-foreground">
-              Content engine
-            </span>
+            <Badge variant="accent">Content engine</Badge>
           </div>
 
           {/* body */}
