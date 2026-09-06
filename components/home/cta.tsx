@@ -1,34 +1,40 @@
-import Link from "next/link";
-import { Container } from "@/components/ui/container";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { GridBackdrop } from "@/components/ui/grid-backdrop";
+import { bookCta, freeSessionCta } from "@/lib/data/cta";
 
 export function Cta() {
   return (
     <section className="border-t border-border">
       <Container className="py-20 sm:py-28">
-        <div className="relative overflow-hidden rounded-3xl bg-foreground px-6 py-16 text-center sm:px-12">
-          <div
-            className="pointer-events-none absolute inset-0 bg-grid-light [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"
-            aria-hidden="true"
-          />
+        <div className="relative overflow-hidden rounded-3xl bg-foreground px-6 py-20 text-center sm:px-12">
+          <GridBackdrop on="dark" fade="center" />
+
           <div className="relative flex flex-col items-center gap-6">
-            <h2 className="max-w-2xl text-3xl font-semibold tracking-tight text-background sm:text-4xl">
-              Ready to build content that sells?
+            <Badge variant="accent">
+              10 free sessions — application closing soon
+            </Badge>
+
+            <h2 className="max-w-3xl text-4xl font-semibold tracking-tight text-background sm:text-5xl">
+              Stop posting into the void, build the system instead
             </h2>
-            <p className="max-w-xl text-base text-background/70">
-              Book a call and we’ll map out your AI content system — no
-              pressure, just a clear plan.
+
+            <p className="max-w-xl text-base text-background/70 sm:text-lg">
+              Apply for a free session, or book straight in at $149.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <Button href="/#sessions" variant="accent" size="lg">
-                Book a call
+
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
+              <Button href={bookCta.href} variant="accent" size="lg">
+                {bookCta.label}
               </Button>
-              <Link
-                href="/free-session"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-background/20 px-6 text-base font-medium text-background transition-colors hover:bg-background/10"
+              <Button
+                href={freeSessionCta.href}
+                variant="outlineLight"
+                size="lg"
               >
-                Talk to the team
-              </Link>
+                {freeSessionCta.label}
+              </Button>
             </div>
           </div>
         </div>

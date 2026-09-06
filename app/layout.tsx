@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Geist_Mono, Manrope, Space_Grotesk } from "next/font/google";
+import { Caveat, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -8,11 +8,6 @@ const manrope = Manrope({
   subsets: ["latin"],
   weight: "variable",
   variable: "--font-manrope",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
 });
 
 const caveat = Caveat({
@@ -38,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${manrope.variable} ${geistMono.variable} ${caveat.variable} ${spaceGrotesk.variable} h-full scroll-smooth antialiased`}
+      className={`${manrope.variable} ${caveat.variable} ${spaceGrotesk.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <Header />

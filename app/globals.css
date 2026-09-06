@@ -19,7 +19,6 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --font-sans: var(--font-manrope);
-  --font-mono: var(--font-geist-mono);
   --font-hand: var(--font-caveat);
   --font-display: var(--font-space-grotesk);
 }
@@ -39,24 +38,51 @@ h4 {
     sans-serif;
 }
 
-/* Subtle grid background (light surfaces) */
+/*
+ * Dotted grid backdrop.
+ * One 32px SVG tile: dotted rules along both axes, with a heavier dot dropped
+ * on the intersection so the crossings read stronger than the lines.
+ * Rendered through <GridBackdrop /> — pair with a .grid-fade-* mask.
+ */
 .bg-grid {
-  background-image: linear-gradient(
-      to right,
-      rgba(10, 10, 10, 0.055) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, rgba(10, 10, 10, 0.055) 1px, transparent 1px);
-  background-size: 44px 44px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg stroke='rgba(10,10,10,0.16)' stroke-width='1' stroke-linecap='round' stroke-dasharray='0.75 3.25'%3E%3Cpath d='M0 0.5H32'/%3E%3Cpath d='M0.5 0V32'/%3E%3C/g%3E%3Ccircle cx='0.5' cy='0.5' r='1.15' fill='rgba(10,10,10,0.3)'/%3E%3C/svg%3E");
+  background-size: 32px 32px;
 }
 
-/* Subtle grid background (dark surfaces) */
+/* Same tile inverted, for dark surfaces (kept fainter on purpose). */
 .bg-grid-light {
-  background-image: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0.08) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 44px 44px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg stroke='rgba(255,255,255,0.11)' stroke-width='1' stroke-linecap='round' stroke-dasharray='0.75 3.25'%3E%3Cpath d='M0 0.5H32'/%3E%3Cpath d='M0.5 0V32'/%3E%3C/g%3E%3Ccircle cx='0.5' cy='0.5' r='1.15' fill='rgba(255,255,255,0.2)'/%3E%3C/svg%3E");
+  background-size: 32px 32px;
+}
+
+/* Grid fade masks — the grid should never hit a hard edge. */
+.grid-fade-edges {
+  -webkit-mask-image: radial-gradient(
+    ellipse 78% 72% at 50% 48%,
+    black 30%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 78% 72% at 50% 48%,
+    black 30%,
+    transparent 100%
+  );
+}
+
+.grid-fade-top {
+  -webkit-mask-image: radial-gradient(
+    ellipse at top,
+    black,
+    transparent 75%
+  );
+  mask-image: radial-gradient(ellipse at top, black, transparent 75%);
+}
+
+.grid-fade-center {
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    black,
+    transparent 72%
+  );
+  mask-image: radial-gradient(ellipse at center, black, transparent 72%);
 }
