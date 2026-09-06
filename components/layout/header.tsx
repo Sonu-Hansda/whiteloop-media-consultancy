@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { navLinks } from "@/lib/data/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -10,18 +11,53 @@ import { Logo } from "@/components/layout/logo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState("");
+
+  // Scroll-spy for the home sections (Sessions, About us).
+  useEffect(() => {
+    if (pathname !== "/") return;
+
+    const ids = ["sessions", "about"];
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        }
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  function isActive(href: string): boolean {
+    if (!href.startsWith("/#")) return pathname === href;
+    return pathname === "/" && activeSection === href.slice(1);
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between">
         <Logo />
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-full px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface"
+              className={cn(
+                "py-2 text-sm font-medium text-foreground transition-colors",
+                isActive(link.href)
+                  ? "border-b-2 border-accent"
+                  : "hover:text-muted-foreground",
+              )}
             >
               {link.label}
             </Link>
@@ -86,7 +122,10 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-base text-foreground hover:bg-surface"
+                className={cn(
+                  "rounded-lg px-3 py-3 text-base text-foreground hover:bg-surface",
+                  isActive(link.href) && "text-accent",
+                )}
               >
                 {link.label}
               </Link>
