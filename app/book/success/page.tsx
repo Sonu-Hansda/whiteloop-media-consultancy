@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { packages } from "@/lib/data/packages";
+import { getSession } from "@/lib/data/sessions";
 
 export const metadata: Metadata = {
   title: "You’re booked — Whiteloop",
@@ -15,7 +16,10 @@ export default async function SuccessPage({
   const params = await searchParams;
   const slug = typeof params.package === "string" ? params.package : undefined;
   const name = typeof params.name === "string" ? params.name : undefined;
-  const pkg = packages.find((p) => p.slug === slug) ?? packages[0];
+  const when = typeof params.when === "string" ? params.when : undefined;
+  const pkg = packages.find((p) => p.slug === slug);
+  const session = slug ? getSession(slug) : undefined;
+  const chosen = pkg?.name ?? session?.title ?? packages[0].name;
 
   return (
     <Container className="py-24 text-center">
@@ -41,12 +45,15 @@ export default async function SuccessPage({
         </h1>
         <p className="text-base text-muted-foreground">
           Thanks for choosing{" "}
-          <span className="font-medium text-foreground">{pkg.name}</span>.
-          We’ll reach out with your calendar link to confirm your call.
+          <span className="font-medium text-foreground">{chosen}</span>.
+          We&apos;ll reach out to confirm your call.
         </p>
-        <div className="rounded-2xl border border-dashed border-border bg-surface p-4 text-sm text-muted-foreground">
-          Calendar scheduling (Calendly) will appear here soon.
-        </div>
+        {when ? (
+          <div className="rounded-2xl border border-dashed border-border bg-surface p-4 text-sm text-foreground">
+            Your slot is booked for{" "}
+            <span className="font-semibold">{when}</span>.
+          </div>
+        ) : null}
         <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
           <Button href="/" variant="accent">
             Back to home

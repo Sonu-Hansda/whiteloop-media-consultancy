@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Caveat, Geist_Mono, Manrope } from "next/font/google";
+import { Caveat, Geist_Mono, Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -21,6 +21,12 @@ const caveat = Caveat({
   variable: "--font-caveat",
 });
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-space-grotesk",
+});
+
 export const metadata: Metadata = {
   title: "Whiteloop — Create content that sells",
   description:
@@ -31,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${manrope.variable} ${geistMono.variable} ${caveat.variable} h-full scroll-smooth antialiased`}
+      className={`${manrope.variable} ${geistMono.variable} ${caveat.variable} ${spaceGrotesk.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <Header />

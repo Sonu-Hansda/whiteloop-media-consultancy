@@ -15,6 +15,8 @@ export default async function BookPage({
   const params = await searchParams;
   const initialPackage =
     typeof params.package === "string" ? params.package : undefined;
+  const initialSession =
+    typeof params.session === "string" ? params.session : undefined;
 
   return (
     <div className="relative">
@@ -32,7 +34,7 @@ export default async function BookPage({
             take it from there.
           </p>
         </div>
-        <BookingFlow initialPackage={initialPackage} />
+        <BookingFlow initialPackage={initialPackage} initialSession={initialSession} />
       </Container>
     </div>
   );
