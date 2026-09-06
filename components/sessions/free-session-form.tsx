@@ -2,10 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { sessionPackages } from "@/lib/data/packages";
 import { saveApplication } from "@/lib/leads";
 import { Field, inputClass } from "@/components/book/form-fields";
 import { QualificationFields } from "@/components/book/qualification-fields";
+import { SessionPicker } from "@/components/sessions/session-picker";
 import { emptyQualification } from "@/lib/data/qualification";
 import type { Qualification } from "@/types";
 
@@ -107,22 +107,11 @@ export function FreeSessionForm() {
           onChange={setQualification}
         />
 
-        <Field label="Which session interests you most?">
-          <select
+        <Field label="Which session interests you most?" hint="Pick one">
+          <SessionPicker
             value={sessionInterest}
-            onChange={(e) => setSessionInterest(e.target.value)}
-            className={inputClass}
-          >
-            <option value="" disabled>
-              Select one
-            </option>
-            {sessionPackages.map((session) => (
-              <option key={session.slug} value={session.name}>
-                {session.name}
-              </option>
-            ))}
-            <option value="Not sure yet">Not sure yet</option>
-          </select>
+            onChange={setSessionInterest}
+          />
         </Field>
       </div>
 

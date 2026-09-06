@@ -1,8 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * Fades its children up once they scroll into view.
+ *
+ * Visibility is flipped by toggling a data attribute on the DOM node rather
+ * than through React state — the effect only ever talks to the observer and
+ * the element, so there is no cascading re-render on reveal.
+ */
 export function Reveal({
   children,
   className,
@@ -13,14 +20,13 @@ export function Reveal({
   delay?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
+      el.dataset.visible = "true";
       return;
     }
 
@@ -28,7 +34,7 @@ export function Reveal({
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setVisible(true);
+            (entry.target as HTMLElement).dataset.visible = "true";
             observer.unobserve(entry.target);
           }
         }
@@ -43,10 +49,11 @@ export function Reveal({
   return (
     <div
       ref={ref}
+      data-visible="false"
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
       className={cn(
-        "transition-all duration-700 ease-out will-change-transform",
-        visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
+        "translate-y-6 opacity-0 transition-all duration-700 ease-out will-change-transform",
+        "data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100",
         className,
       )}
     >

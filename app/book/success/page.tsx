@@ -56,8 +56,8 @@ export default async function SuccessPage({
           <Button href="/" variant="accent">
             Back to home
           </Button>
-          <Button href="/#packages" variant="outline">
-            View packages
+          <Button href="/#sessions" variant="outline">
+            View sessions
           </Button>
         </div>
       </div>

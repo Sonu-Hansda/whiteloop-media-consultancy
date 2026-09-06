@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
+import { GridBackdrop } from "@/components/ui/grid-backdrop";
 import { FreeSessionForm } from "@/components/sessions";
 
 export const metadata: Metadata = {
@@ -12,10 +13,7 @@ export const metadata: Metadata = {
 export default function FreeSessionPage() {
   return (
     <div className="relative">
-      <div
-        className="pointer-events-none absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_top,black,transparent_75%)]"
-        aria-hidden="true"
-      />
+      <GridBackdrop fade="top" />
       <Container className="relative py-16 sm:py-20">
         <div className="mx-auto max-w-xl text-center">
           <Badge>Limited slots for this month</Badge>
@@ -27,7 +25,7 @@ export default function FreeSessionPage() {
             Tell us where you&apos;re at.
           </p>
         </div>
-        <div className="mx-auto mt-12 max-w-xl">
+        <div className="mx-auto mt-12 max-w-2xl">
           <FreeSessionForm />
         </div>
       </Container>
