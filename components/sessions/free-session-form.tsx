@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { sessions } from "@/lib/data/sessions";
+import { sessionPackages } from "@/lib/data/packages";
 import { saveApplication } from "@/lib/leads";
 import { Field, inputClass } from "@/components/book/form-fields";
 import { QualificationFields } from "@/components/book/qualification-fields";
@@ -116,9 +116,9 @@ export function FreeSessionForm() {
             <option value="" disabled>
               Select one
             </option>
-            {sessions.map((session) => (
-              <option key={session.slug} value={session.title}>
-                {session.title}
+            {sessionPackages.map((session) => (
+              <option key={session.slug} value={session.name}>
+                {session.name}
               </option>
             ))}
             <option value="Not sure yet">Not sure yet</option>

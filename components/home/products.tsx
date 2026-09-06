@@ -1,109 +1,88 @@
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Container } from "@/components/ui/container";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
-import { packages } from "@/lib/data/packages";
-import { cn } from "@/lib/utils";
+import { productPackages } from "@/lib/data/packages";
 
 export function Products() {
+  const products = productPackages.filter((p) => p.slug !== "bundle");
+  const bundle = productPackages.find((p) => p.slug === "bundle");
+
   return (
     <section id="products" className="scroll-mt-24 border-t border-border">
       <Container className="py-20 sm:py-28">
         <Reveal>
-          <SectionHeading
-            eyebrow="Products"
-            title="Choose your package"
-            description="Pick the plan that fits where you are — every package gets you the same proven system."
-          />
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
-            {packages.map((pkg) => (
+          <div className="mx-auto max-w-3xl text-center">
+            <Badge>Products</Badge>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+              Build it yourself
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
+              Not ready for a session? Start with the systems our sessions are
+              built on — no live call required.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-2 sm:mt-14 sm:grid-cols-2">
+            {products.map((product) => (
               <div
-                key={pkg.slug}
-                className={cn(
-                  "flex flex-col rounded-3xl border p-6",
-                  pkg.featured
-                    ? "border-foreground bg-foreground text-background shadow-xl"
-                    : "border-border bg-surface",
-                )}
+                key={product.slug}
+                className="flex min-h-[260px] flex-col rounded-2xl bg-black p-6 text-white transition-transform duration-200 hover:-translate-y-1"
               >
-                {pkg.featured ? (
-                  <Badge variant="accent" className="mb-4 w-fit">
-                    Most popular
-                  </Badge>
-                ) : (
-                  <Badge variant="outline" className="mb-4 w-fit">
-                    {pkg.duration}
-                  </Badge>
-                )}
-
-                <h3 className="text-xl font-semibold">{pkg.name}</h3>
-                <p
-                  className={cn(
-                    "mt-1 text-sm",
-                    pkg.featured ? "text-background/70" : "text-muted-foreground",
-                  )}
-                >
-                  {pkg.tagline}
+                <span className="text-[10px] font-medium text-white/80">
+                  {product.number}
+                </span>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                  {product.name}
+                </h3>
+                <p className="mt-3 text-[13px] leading-relaxed text-white/70">
+                  {product.description}
                 </p>
-
-                <div className="mt-5">
-                  <span className="text-3xl font-semibold">{pkg.price}</span>
-                  <p
-                    className={cn(
-                      "mt-1 text-sm",
-                      pkg.featured
-                        ? "text-background/70"
-                        : "text-muted-foreground",
-                    )}
+                <div className="mt-auto pt-8">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-lg font-bold">{product.price}</span>
+                    <span className="text-[10px] text-white/50">
+                      {product.meta}
+                    </span>
+                  </div>
+                  <Link
+                    href={`/products/${product.slug}`}
+                    className="mt-2 inline-flex items-center text-xs font-semibold text-accent transition-opacity hover:opacity-80"
                   >
-                    {pkg.duration}
-                  </p>
+                    Get {product.name}
+                    <span className="ml-1 text-base leading-none">→</span>
+                  </Link>
                 </div>
-
-                <ul className="mt-6 flex flex-1 flex-col gap-3">
-                  {pkg.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        className={cn(
-                          "mt-0.5 h-4 w-4 shrink-0",
-                          pkg.featured ? "text-accent" : "text-foreground",
-                        )}
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M5 12l4 4L19 6"
-                          stroke="currentColor"
-                          strokeWidth="2.4"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      <span
-                        className={
-                          pkg.featured
-                            ? "text-background/85"
-                            : "text-foreground/80"
-                        }
-                      >
-                        {f}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Button
-                  href={`/book?package=${pkg.slug}`}
-                  variant={pkg.featured ? "accent" : "outline"}
-                  className="mt-6 w-full"
-                >
-                  Book session
-                </Button>
               </div>
             ))}
           </div>
+
+          {bundle ? (
+            <div className="mt-2 rounded-2xl bg-accent p-7 text-black sm:p-8">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                  <h3 className="text-2xl font-semibold tracking-tight">
+                    {bundle.name}
+                  </h3>
+                  <p className="mt-1 text-sm text-black/70">
+                    {bundle.description}
+                  </p>
+                </div>
+                <div className="flex shrink-0 flex-col items-start gap-3 lg:items-end">
+                  <div>
+                    <div className="text-xl font-bold">{bundle.price}</div>
+                    <div className="text-sm text-black/60">{bundle.meta}</div>
+                  </div>
+                  <Link
+                    href={`/book?product=${bundle.slug}`}
+                    className="inline-flex items-center justify-center rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-accent transition-transform duration-200 hover:scale-[1.02]"
+                  >
+                    Get the bundle
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : null}
         </Reveal>
       </Container>
     </section>

@@ -1,8 +1,8 @@
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import type { Session } from "@/types";
+import type { SessionPackage } from "@/types";
 
-export function SessionTimeline({ session }: { session: Session }) {
+export function SessionTimeline({ session }: { session: SessionPackage }) {
   return (
     <section className="border-t border-border">
       <Container className="py-16 sm:py-20">

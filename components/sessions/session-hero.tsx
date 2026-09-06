@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { CheckIcon } from "@/components/ui/check-icon";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import type { Session } from "@/types";
+import type { SessionPackage } from "@/types";
 
-export function SessionHero({ session }: { session: Session }) {
+export function SessionHero({ session }: { session: SessionPackage }) {
   return (
     <section className="border-t border-border">
       <Container className="pt-6">
@@ -19,14 +19,14 @@ export function SessionHero({ session }: { session: Session }) {
             Sessions
           </Link>
           <span aria-hidden="true">/</span>
-          <span className="text-foreground">{session.title}</span>
+          <span className="text-foreground">{session.name}</span>
         </nav>
 
         <div className="grid gap-10 py-10 sm:py-14 lg:grid-cols-[1.3fr_1fr] lg:items-start lg:gap-14">
           <Reveal>
             <Badge>{session.number}</Badge>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-              {session.title}
+              {session.name}
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">
               {session.description}

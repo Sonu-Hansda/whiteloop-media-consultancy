@@ -6,9 +6,11 @@ import { cn } from "@/lib/utils";
 export function QualificationFields({
   value,
   onChange,
+  variant = "session",
 }: {
   value: Qualification;
   onChange: (next: Qualification) => void;
+  variant?: "session" | "product";
 }) {
   function set<K extends keyof Qualification>(key: K, val: Qualification[K]) {
     onChange({ ...value, [key]: val });
@@ -71,31 +73,35 @@ export function QualificationFields({
         />
       </Field>
 
-      <Field label="Current audience size">
-        <ChipGroup
-          options={audiences}
-          value={value.audience}
-          onChange={(v) => set("audience", v)}
-        />
-      </Field>
+      {variant !== "product" ? (
+        <>
+          <Field label="Current audience size">
+            <ChipGroup
+              options={audiences}
+              value={value.audience}
+              onChange={(v) => set("audience", v)}
+            />
+          </Field>
 
-      <Field label="How much are you looking to invest in content, monthly?">
-        <ChipGroup
-          options={budgets}
-          value={value.budget}
-          onChange={(v) => set("budget", v)}
-        />
-      </Field>
+          <Field label="How much are you looking to invest in content, monthly?">
+            <ChipGroup
+              options={budgets}
+              value={value.budget}
+              onChange={(v) => set("budget", v)}
+            />
+          </Field>
 
-      <Field label="What's your biggest content challenge right now?">
-        <textarea
-          value={value.challenge}
-          onChange={(e) => set("challenge", e.target.value)}
-          placeholder="Tell us what's not working today"
-          rows={3}
-          className={cn(inputClass, "resize-none")}
-        />
-      </Field>
+          <Field label="What's your biggest content challenge right now?">
+            <textarea
+              value={value.challenge}
+              onChange={(e) => set("challenge", e.target.value)}
+              placeholder="Tell us what's not working today"
+              rows={3}
+              className={cn(inputClass, "resize-none")}
+            />
+          </Field>
+        </>
+      ) : null}
     </>
   );
 }

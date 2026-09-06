@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import { sessions } from "@/lib/data/sessions";
+import { masteryPackage, sessionPackages } from "@/lib/data/packages";
 
 export function Sessions() {
   return (
@@ -29,7 +29,7 @@ export function Sessions() {
 
           {/* Session Cards */}
           <div className="mt-10 grid gap-2 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">
-            {sessions.map((session) => (
+            {sessionPackages.map((session) => (
               <div
                 key={session.slug}
                 className="flex min-h-[270px] flex-col rounded-2xl bg-black p-6 text-white transition-transform duration-200 hover:-translate-y-1"
@@ -41,7 +41,7 @@ export function Sessions() {
 
                 {/* Title */}
                 <h3 className="mt-2 text-lg font-semibold tracking-tight">
-                  {session.title}
+                  {session.name}
                 </h3>
 
                 {/* Description */}
@@ -87,22 +87,22 @@ export function Sessions() {
                 <Badge>Most Recommended</Badge>
 
                 <h3 className="mt-5 text-2xl font-semibold tracking-tight sm:text-3xl">
-                  AI Content Mastery Program
+                  {masteryPackage.name}
                 </h3>
 
                 <p className="mt-1 text-sm text-black/70">
-                  All four problems sound like you? This is for you.
+                  {masteryPackage.description}
                 </p>
 
                 <p className="mt-5 text-xs font-medium">
-                  All 4 sessions + Content OS + Clone OS
+                  {masteryPackage.cardDescription}
                 </p>
 
                 <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-xl font-bold">$490</span>
+                  <span className="text-xl font-bold">{masteryPackage.price}</span>
 
                   <span className="text-xs text-black/50 line-through">
-                    $596
+                    {masteryPackage.originalPrice}
                   </span>
                 </div>
               </div>
@@ -110,7 +110,7 @@ export function Sessions() {
               {/* Program CTA */}
               <div className="shrink-0">
                 <Link
-                  href="/book?package=growth"
+                  href={`/book?session=${masteryPackage.slug}`}
                   className="inline-flex items-center justify-center rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-accent transition-transform duration-200 hover:scale-[1.02]"
                 >
                   Book the Program

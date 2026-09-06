@@ -21,7 +21,7 @@ export type BookingInput = {
   packageSlug: string;
   packageName: string;
   packagePrice: string;
-  kind?: "package" | "session";
+  kind?: "session" | "mixed";
 } & Qualification;
 
 export type Slot = {

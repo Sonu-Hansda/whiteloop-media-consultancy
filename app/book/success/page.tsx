@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { packages } from "@/lib/data/packages";
-import { getSession } from "@/lib/data/sessions";
+import { getPackage } from "@/lib/data/packages";
 
 export const metadata: Metadata = {
   title: "You’re booked — Whiteloop",
@@ -17,9 +16,8 @@ export default async function SuccessPage({
   const slug = typeof params.package === "string" ? params.package : undefined;
   const name = typeof params.name === "string" ? params.name : undefined;
   const when = typeof params.when === "string" ? params.when : undefined;
-  const pkg = packages.find((p) => p.slug === slug);
-  const session = slug ? getSession(slug) : undefined;
-  const chosen = pkg?.name ?? session?.title ?? packages[0].name;
+  const pkg = slug ? getPackage(slug) : undefined;
+  const chosen = pkg?.name ?? "your package";
 
   return (
     <Container className="py-24 text-center">
@@ -46,7 +44,7 @@ export default async function SuccessPage({
         <p className="text-base text-muted-foreground">
           Thanks for choosing{" "}
           <span className="font-medium text-foreground">{chosen}</span>.
-          We&apos;ll reach out to confirm your call.
+          We&apos;ll reach out with the next steps.
         </p>
         {when ? (
           <div className="rounded-2xl border border-dashed border-border bg-surface p-4 text-sm text-foreground">
@@ -58,7 +56,7 @@ export default async function SuccessPage({
           <Button href="/" variant="accent">
             Back to home
           </Button>
-          <Button href="/#products" variant="outline">
+          <Button href="/#packages" variant="outline">
             View packages
           </Button>
         </div>
