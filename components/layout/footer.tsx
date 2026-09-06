@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Logo } from "@/components/layout/logo";
 import { navLinks } from "@/lib/data/navigation";
+import { bookCta } from "@/lib/data/cta";
 
 export function Footer() {
   return (
@@ -26,11 +27,12 @@ export function Footer() {
               {link.label}
             </Link>
           ))}
+          {/* Straight to the form here — the footer is a nav list, not a pitch. */}
           <Link
             href="/book"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
-            Book a call
+            {bookCta.label}
           </Link>
         </nav>
       </Container>
