@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navLinks } from "@/lib/data/navigation";
+import { bookCta } from "@/lib/data/cta";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -65,8 +66,8 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button href="/#sessions" variant="dark" size="md">
-            Book a call
+          <Button href={bookCta.href} variant="dark" size="md">
+            {bookCta.label}
           </Button>
         </div>
 
@@ -131,12 +132,12 @@ export function Header() {
               </Link>
             ))}
             <Button
-              href="/#sessions"
+              href={bookCta.href}
               variant="dark"
               size="md"
               className="mt-2 w-full"
             >
-              Book a call
+              {bookCta.label}
             </Button>
           </Container>
         </div>
