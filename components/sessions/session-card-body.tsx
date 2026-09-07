@@ -38,7 +38,7 @@ export function SessionCardBody({
     <div
       className={cn(
         sessionCardShell,
-        "min-h-[270px]",
+        "min-h-[260px]",
         selected && "ring-2 ring-accent ring-offset-2",
         className,
       )}

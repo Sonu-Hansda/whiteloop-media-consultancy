@@ -32,7 +32,9 @@ export function Section({
         className,
       )}
     >
-      <Container className={cn("w-full py-20 sm:py-24", containerClassName)}>
+      <Container
+        className={cn("w-full py-[clamp(3rem,7vh,6rem)]", containerClassName)}
+      >
         {children}
       </Container>
     </section>

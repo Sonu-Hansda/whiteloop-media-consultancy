@@ -38,7 +38,7 @@ export default async function SuccessPage({
             />
           </svg>
         </span>
-        <h1 className="text-3xl font-semibold tracking-tight text-foreground">
+        <h1 className="text-3xl font-semibold tracking-display text-foreground">
           You’re booked{name ? `, ${name}` : ""}!
         </h1>
         <p className="text-base text-muted-foreground">

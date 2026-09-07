@@ -68,7 +68,7 @@ export function FreeSessionForm() {
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent text-2xl font-bold text-accent-foreground">
           ✓
         </span>
-        <h2 className="mt-6 text-2xl font-semibold tracking-tight text-foreground">
+        <h2 className="mt-6 text-2xl font-semibold tracking-display text-foreground">
           Application received
         </h2>
         <p className="mx-auto mt-3 max-w-sm text-sm text-muted-foreground">

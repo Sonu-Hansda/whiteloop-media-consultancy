@@ -25,7 +25,7 @@ export function SessionHero({ session }: { session: SessionPackage }) {
         <div className="grid gap-10 py-10 sm:py-14 lg:grid-cols-[1.3fr_1fr] lg:items-start lg:gap-14">
           <Reveal>
             <Badge>{session.number}</Badge>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="mt-4 text-4xl font-semibold tracking-display text-foreground sm:text-5xl">
               {session.name}
             </h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">

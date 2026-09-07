@@ -7,7 +7,7 @@ export function SessionTimeline({ session }: { session: SessionPackage }) {
     <section className="border-t border-border">
       <Container className="py-16 sm:py-20">
         <Reveal>
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+          <h2 className="text-2xl font-semibold tracking-display text-foreground sm:text-3xl">
             Inside the 2 hours
           </h2>
           <div className="mt-8">

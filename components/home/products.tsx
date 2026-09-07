@@ -13,7 +13,7 @@ export function Products() {
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <Badge>Products</Badge>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            <h2 className="mt-4 text-3xl font-semibold tracking-display text-foreground sm:text-4xl lg:text-5xl">
               Build it yourself
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
@@ -22,7 +22,7 @@ export function Products() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-2 sm:mt-14 sm:grid-cols-2">
+          <div className="mt-[clamp(1.5rem,4vh,3.5rem)] grid gap-2 sm:grid-cols-2">
             {products.map((product) => (
               <div
                 key={product.slug}
@@ -57,10 +57,10 @@ export function Products() {
           </div>
 
           {bundle ? (
-            <div className="mt-2 rounded-2xl bg-accent p-7 text-black sm:p-8">
+            <div className="mt-2 rounded-2xl bg-accent p-6 text-black sm:p-7">
               <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <h3 className="text-2xl font-semibold tracking-tight">
+                  <h3 className="text-2xl font-semibold tracking-display">
                     {bundle.name}
                   </h3>
                   <p className="mt-1 text-sm text-black/70">

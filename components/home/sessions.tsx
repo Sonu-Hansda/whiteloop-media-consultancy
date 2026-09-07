@@ -12,7 +12,7 @@ export function Sessions() {
           <div className="mx-auto max-w-3xl text-center">
             <Badge>Sessions</Badge>
 
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            <h2 className="mt-4 text-3xl font-semibold tracking-display text-foreground sm:text-4xl lg:text-5xl">
               Pick Your Problem
             </h2>
 
@@ -22,19 +22,19 @@ export function Sessions() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-2 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-[clamp(1.5rem,4vh,3.5rem)] grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
             {sessionPackages.map((session) => (
               <SessionCard key={session.slug} session={session} />
             ))}
           </div>
 
           {/* Featured program */}
-          <div className="mt-2 rounded-2xl bg-accent p-7 text-black sm:p-8 lg:p-10">
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          <div className="mt-2 rounded-2xl bg-accent p-6 text-black sm:p-7 lg:p-8">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div>
                 <Badge>Most Recommended</Badge>
 
-                <h3 className="mt-5 text-2xl font-semibold tracking-tight sm:text-3xl">
+                <h3 className="mt-4 text-2xl font-semibold tracking-display sm:text-3xl">
                   {masteryPackage.name}
                 </h3>
 
@@ -42,7 +42,7 @@ export function Sessions() {
                   {masteryPackage.description}
                 </p>
 
-                <p className="mt-5 text-xs font-medium">
+                <p className="mt-4 text-xs font-medium">
                   {masteryPackage.cardDescription}
                 </p>
 

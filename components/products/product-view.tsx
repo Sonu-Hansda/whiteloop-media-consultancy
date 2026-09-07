@@ -27,7 +27,7 @@ export function ProductView({ product }: { product: ProductPackage }) {
           <div className="grid gap-10 py-10 sm:py-14 lg:grid-cols-[1.3fr_1fr] lg:items-start lg:gap-14">
             <Reveal>
               <Badge>{product.number ?? "Product"}</Badge>
-              <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+              <h1 className="mt-4 text-4xl font-semibold tracking-display text-foreground sm:text-5xl">
                 {product.name}
               </h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">
@@ -81,7 +81,7 @@ export function ProductView({ product }: { product: ProductPackage }) {
         <section className="border-t border-border">
           <Container className="py-16 sm:py-20">
             <Reveal>
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              <h2 className="text-2xl font-semibold tracking-display text-foreground sm:text-3xl">
                 Who this is for
               </h2>
               <div className="mt-6 flex flex-wrap gap-2.5">
@@ -100,7 +100,7 @@ export function ProductView({ product }: { product: ProductPackage }) {
         <section className="border-t border-border">
           <Container className="py-16 sm:py-20">
             <Reveal>
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              <h2 className="text-2xl font-semibold tracking-display text-foreground sm:text-3xl">
                 Questions
               </h2>
               <div className="mt-6">

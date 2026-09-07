@@ -11,7 +11,7 @@ export function About() {
             <Badge>{about.eyebrow}</Badge>
 
             <div className="mt-10 w-full max-w-4xl">
-              <h2 className="text-3xl tracking-tight text-foreground sm:text-4xl">
+              <h2 className="text-3xl tracking-display text-foreground sm:text-4xl">
                 {about.title}
               </h2>
 

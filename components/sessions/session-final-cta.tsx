@@ -13,7 +13,7 @@ export function SessionFinalCta({ session }: { session: SessionPackage }) {
             <Badge variant="accent">
               {session.price} · {session.duration} · live 1:1
             </Badge>
-            <h2 className="mx-auto mt-5 max-w-2xl text-2xl font-semibold tracking-tight text-background sm:text-3xl">
+            <h2 className="mx-auto mt-5 max-w-2xl text-2xl font-semibold tracking-display text-background sm:text-3xl">
               {session.finalCta.heading}
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-sm text-background/60">

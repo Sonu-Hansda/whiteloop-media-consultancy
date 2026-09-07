@@ -15,7 +15,7 @@ export function Cta() {
               10 free sessions — application closing soon
             </Badge>
 
-            <h2 className="max-w-3xl text-4xl font-semibold tracking-tight text-background sm:text-5xl">
+            <h2 className="max-w-3xl text-4xl font-semibold tracking-display text-background sm:text-5xl">
               Stop posting into the void, build the system instead
             </h2>
 

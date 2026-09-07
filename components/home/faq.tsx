@@ -36,7 +36,7 @@ export function Faq() {
           <div className="mx-auto max-w-3xl text-center">
             <Badge>FAQ</Badge>
 
-            <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+            <h2 className="mt-4 text-4xl font-bold tracking-display text-foreground sm:text-5xl">
               Before you book
             </h2>
           </div>

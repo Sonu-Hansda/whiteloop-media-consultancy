@@ -17,7 +17,7 @@ export default function FreeSessionPage() {
       <Container className="relative py-16 sm:py-20">
         <div className="mx-auto max-w-xl text-center">
           <Badge>Limited slots for this month</Badge>
-          <h1 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          <h1 className="mt-4 text-3xl font-semibold tracking-display text-foreground sm:text-4xl">
             Apply for a free session
           </h1>
           <p className="mx-auto mt-3 max-w-md text-base text-muted-foreground">

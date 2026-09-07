@@ -23,6 +23,9 @@
   --color-accent-foreground: var(--accent-foreground);
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-serif: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+
+  /* Helvetica needs a tighter set than Space Grotesk did at display sizes. */
+  --tracking-display: -0.035em;
 }
 
 body {

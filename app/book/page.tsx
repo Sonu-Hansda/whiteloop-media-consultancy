@@ -25,7 +25,7 @@ export default async function BookPage({
       <GridBackdrop fade="top" />
       <Container className="relative py-16 sm:py-20">
         <div className="mx-auto mb-12 max-w-2xl text-center">
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          <h1 className="text-3xl font-semibold tracking-display text-foreground sm:text-4xl">
             Book a call
           </h1>
           <p className="mt-3 text-base text-muted-foreground">
