@@ -6,7 +6,7 @@ import { bookCta } from "@/lib/data/cta";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-surface">
+    <footer className="snap-end border-t border-border bg-surface">
       <Container className="flex flex-col gap-8 py-12 md:flex-row md:items-start md:justify-between">
         <div className="flex flex-col gap-3">
           <Logo />

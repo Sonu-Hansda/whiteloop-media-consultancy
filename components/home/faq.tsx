@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
-import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
 
@@ -30,8 +30,7 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="scroll-mt-24 border-t border-border">
-      <Container className="py-20 sm:py-24">
+    <Section id="faq">
         <Reveal>
           {/* Header */}
           <div className="mx-auto max-w-3xl text-center">
@@ -96,7 +95,6 @@ export function Faq() {
             })}
           </div>
         </Reveal>
-      </Container>
-    </section>
+      </Section>
   );
 }

@@ -1,12 +1,11 @@
 import { Badge } from "@/components/ui/badge";
-import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { about } from "@/lib/data/about";
 
 export function About() {
   return (
-    <section id="about" className="scroll-mt-24 border-t border-border">
-      <Container className="py-20 sm:py-28">
+    <Section id="about">
         <Reveal>
           <div className="flex flex-col items-center">
             <Badge>{about.eyebrow}</Badge>
@@ -29,7 +28,6 @@ export function About() {
             </div>
           </div>
         </Reveal>
-      </Container>
-    </section>
+      </Section>
   );
 }

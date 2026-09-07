@@ -1,13 +1,12 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
 import { GridBackdrop } from "@/components/ui/grid-backdrop";
 import { bookCta, freeSessionCta } from "@/lib/data/cta";
 
 export function Cta() {
   return (
-    <section className="border-t border-border">
-      <Container className="py-20 sm:py-28">
+    <Section>
         <div className="relative overflow-hidden rounded-3xl bg-foreground px-6 py-20 text-center sm:px-12">
           <GridBackdrop on="dark" fade="center" />
 
@@ -38,7 +37,6 @@ export function Cta() {
             </div>
           </div>
         </div>
-      </Container>
-    </section>
+      </Section>
   );
 }

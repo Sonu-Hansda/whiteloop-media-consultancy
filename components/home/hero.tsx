@@ -7,20 +7,22 @@ import { bookCta, freeSessionCta } from "@/lib/data/cta";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative snap-start overflow-hidden">
       <GridBackdrop fade="edges" />
 
       <Container className="relative">
-        <div className="relative flex min-h-[570px] flex-col items-center justify-center py-20 text-center sm:py-24">
+        <div className="relative flex min-h-[620px] flex-col items-center justify-center py-20 text-center md:min-h-[calc(100svh-var(--header-h))] md:py-24">
           <HeroLabels />
 
           <div className="relative z-10 flex max-w-5xl flex-col items-center">
-            <HeroTrust />
+            <div className="animate-rise [--enter-delay:80ms]">
+              <HeroTrust />
+            </div>
 
-            <h1 className="mt-7 text-5xl font-medium leading-[0.98] tracking-[-0.045em] text-foreground sm:text-6xl md:text-7xl lg:text-[72px]">
+            <h1 className="animate-rise mt-7 text-5xl [--enter-delay:180ms] font-medium leading-[0.98] tracking-[-0.045em] text-foreground sm:text-6xl md:text-7xl lg:text-[72px]">
               Create content{" "}
               <span className="relative inline-block whitespace-nowrap">
-                <span className="relative z-10 px-1 font-hand after:absolute after:inset-x-0 after:bottom-[5%] after:-z-10 after:h-[72%] after:bg-accent after:content-['']">
+                <span className="highlight-sweep relative z-10 px-1 font-serif italic after:absolute after:inset-x-0 after:bottom-[5%] after:-z-10 after:h-[72%] after:bg-accent after:content-['']">
                   that sells
                 </span>
 
@@ -30,13 +32,13 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="mt-7 max-w-2xl text-base leading-6 text-muted-foreground sm:text-lg">
+            <p className="animate-rise mt-7 max-w-2xl [--enter-delay:280ms] text-base leading-6 text-muted-foreground sm:text-lg">
               We build you a complete AI content system in 4 sessions. Your
               ideal clients find you, trust you, and buy from you, without a
               single sales call.
             </p>
 
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
+            <div className="animate-rise mt-7 flex flex-wrap items-center justify-center gap-4 [--enter-delay:380ms]">
               <Button
                 href={bookCta.href}
                 variant="dark"

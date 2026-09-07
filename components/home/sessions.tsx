@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { SessionCard } from "@/components/home/session-card";
 import { masteryPackage, sessionPackages } from "@/lib/data/packages";
 
 export function Sessions() {
   return (
-    <section id="sessions" className="scroll-mt-24 border-t border-border">
-      <Container className="py-20 sm:py-28">
+    <Section id="sessions">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <Badge>Sessions</Badge>
@@ -68,7 +67,6 @@ export function Sessions() {
             </div>
           </div>
         </Reveal>
-      </Container>
-    </section>
+      </Section>
   );
 }

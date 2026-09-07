@@ -1,11 +1,10 @@
-import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
 
 export function Video() {
   return (
-    <section id="video" className="scroll-mt-24 border-t border-border">
-      <Container className="py-20 sm:py-28">
+    <Section id="video">
         <Reveal>
           <SectionHeading
             eyebrow="Watch"
@@ -30,7 +29,6 @@ export function Video() {
             </div>
           </div>
         </Reveal>
-      </Container>
-    </section>
+      </Section>
   );
 }
